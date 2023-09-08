@@ -1,17 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 let User = (props) => {
   return (
     <tr>
-        {/* <th scope="row">{props.key}</th> */}
         <td>{props.id}</td>
         <td>{props.name}</td>
-        <td>{props.surName}</td>
+        <td>{props.username}</td>
         <td>{props.email}</td>
         <td><button className='btn btn-primary mx-2'>View</button></td>
-        <td><button className='btn btn-outline-primary mx-2'>Edit</button></td>
-        <td><button className='btn btn-danger mx-2'>Delete</button></td>
+        <td><Link to={`/edit/${props.id}`} className='btn btn-outline-primary mx-2'>Edit</Link></td>
+        <td><button className='btn btn-danger mx-2' onClick={() => props.onDelete(props.id)}>Delete</button></td>
     </tr>
   );
 };

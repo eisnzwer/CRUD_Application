@@ -1,39 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import User from './User/User';
+import { useParams } from 'react-router-dom';
 
+export const LINK = 'ohio.usa';
 
 let MainPage = () => {
-  const LINK = 'ohio.usa';
   let initialState = [
     {
       name: 'alex',
-      surname: 'krist',
+      username: 'krist',
       email: 'alex@mail.ru',
       id: 0,
     },
     {
       name: 'Bobi',
-      surname: 'krist',
+      username: 'krist',
       email: 'Bobi@mail.ru',
       id: 1,
     },
     {
       name: 'James',
-      surname: 'krist',
+      username: 'krist',
       email: 'James@mail.ru',
       id: 2,
     }
   ];
 
+  const {id} = useParams();
+
   const [users, setUsers] = useState(initialState);
 
-  useEffect(async () => {
-    let response = await axios.get(LINK);
-    console.log(response);
-  },[]);
+  // useEffect(async () => {
+  //   let response = await axios.get(LINK);
+  //   setUsers(response.data);
+  // },[]);
 
-  let usersNodes = users.map(user => <User id={user.id + 1} key={user.id} name={user.name} surName={user.name} email={user.email}/>);
+  const deleteUser = async (id) => {
+    await axios.delete(`${LINK}/user/${id}`);
+    setUsers();
+  };
+
+  let usersNodes = users.map(user => <User id={user.id + 1} key={user.id} name={user.name} username={user.username} email={user.email} onDelete={deleteUser}/>);
   return (
     <table className="table table-striped">
         <thead>

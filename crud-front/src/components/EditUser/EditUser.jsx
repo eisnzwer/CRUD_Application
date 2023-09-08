@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { LINK } from '../MainPage/MainPage.jsx';
 import style from './AddUser.module.css';
 
 let EditUser = () => {
   let navigate = useNavigate();
+
+  const {id} = useParams();
 
   let initialState = {
     name: '',
@@ -22,21 +24,26 @@ let EditUser = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      axios.post(`${LINK}/user`, user);
+      axios.put(`${LINK}/user/${id}`, user);
     } catch (error) {
       console.log('Invalid call');
     }
     navigate('/');
   };
 
-  
+  const loadUser = async () => {
+    const response = await axios.get(`${LINK}/user/${id}`);
+    setUser(response.data);
+  };
+
+  useEffect(() => { loadUser();}, []);
 
   return (
     <form 
       className={style.main} 
       onSubmit={(e) => onSubmit(e)}
       >
-    <h1 className="h3 mb-3 fw-normal">Input user data</h1>
+    <h1 className="h3 mb-3 fw-normal">Edit user data</h1>
       <div className={`${style.inputsContainer} form-container container`}>
         <label htmlFor="form-floating">Name</label>
         <div className="form-floating">
