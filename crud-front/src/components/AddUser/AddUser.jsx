@@ -19,13 +19,19 @@ let EditUser = () => {
     setUser({...user, [e.target.name]: e.target.value });
   };
 
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     axios.post('http://localhost:8080/user', user);
+  //   } catch (error) {
+  //     console.log('Invalid call');
+  //   }
+  //   navigate('/');
+  // };
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      axios.post(`${LINK}/user`, user);
-    } catch (error) {
-      console.log('Invalid call');
-    }
+    await axios.post('http://localhost:8080/user', user);
     navigate('/');
   };
 

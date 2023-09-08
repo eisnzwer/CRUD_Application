@@ -3,45 +3,51 @@ import axios from 'axios';
 import User from './User/User';
 import { useParams } from 'react-router-dom';
 
-export const LINK = 'ohio.usa';
+export const LINK = 'http://localhost:8080';
 
 let MainPage = () => {
   let initialState = [
-    {
-      name: 'alex',
-      username: 'krist',
-      email: 'alex@mail.ru',
-      id: 0,
-    },
-    {
-      name: 'Bobi',
-      username: 'krist',
-      email: 'Bobi@mail.ru',
-      id: 1,
-    },
-    {
-      name: 'James',
-      username: 'krist',
-      email: 'James@mail.ru',
-      id: 2,
-    }
+    // {
+    //   name: 'alex',
+    //   username: 'krist',
+    //   email: 'alex@mail.ru',
+    //   id: 0,
+    // },
+    // {
+    //   name: 'Bobi',
+    //   username: 'krist',
+    //   email: 'Bobi@mail.ru',
+    //   id: 1,
+    // },
+    // {
+    //   name: 'James',
+    //   username: 'krist',
+    //   email: 'James@mail.ru',
+    //   id: 2,
+    // }
   ];
 
   // const {id} = useParams();
 
-  const [users, setUsers] = useState(initialState);
+  const [users, setUsers] = useState([]);
 
-  // useEffect(async () => {
-  //   let response = await axios.get(LINK);
-  //   setUsers(response.data);
-  // },[]);
+  // const { id } = useParams();
 
-  const deleteUser = async (id) => {
-    await axios.delete(`${LINK}/user/${id}`);
-    setUsers();
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  const loadUsers = async () => {
+    const result = await axios.get('http://localhost:8080/users');
+    setUsers(result.data);
   };
 
-  let usersNodes = users.map(user => <User id={user.id + 1} key={user.id} name={user.name} username={user.username} email={user.email} onDelete={deleteUser}/>);
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:8080/user/${id}`);
+    setUsers({...users});
+  };
+
+  let usersNodes = users.map(user => <User id={user.id} key={user.id} name={user.name} username={user.username} email={user.email} onDelete={deleteUser}/>);
   return (
     <table className="table table-striped">
         <thead>

@@ -24,7 +24,7 @@ let EditUser = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      axios.put(`${LINK}/user/${id}`, user);
+      axios.put(`http://localhost:8080/user/${id}`, user);
     } catch (error) {
       console.log('Invalid call');
     }
