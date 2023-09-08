@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import User from './User/User';
 
+
 let MainPage = () => {
-  let users = [
+  const LINK = 'ohio.usa';
+  let initialState = [
     {
       name: 'alex',
       surname: 'krist',
@@ -22,6 +25,14 @@ let MainPage = () => {
       id: 2,
     }
   ];
+
+  const [users, setUsers] = useState(initialState);
+
+  useEffect(async () => {
+    let response = await axios.get(LINK);
+    console.log(response);
+  },[]);
+
   let usersNodes = users.map(user => <User id={user.id + 1} key={user.id} name={user.name} surName={user.name} email={user.email}/>);
   return (
     <table className="table table-striped">
