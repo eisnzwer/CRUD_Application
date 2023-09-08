@@ -27,7 +27,7 @@ let MainPage = () => {
     }
   ];
 
-  const {id} = useParams();
+  // const {id} = useParams();
 
   const [users, setUsers] = useState(initialState);
 
