@@ -3,7 +3,7 @@ import axios from 'axios';
 import User from './User/User';
 import { useParams } from 'react-router-dom';
 
-export const LINK = 'http://localhost:8080';
+export const LINK = 'http://localhost:8080/users';
 
 let MainPage = () => {
   let initialState = [
