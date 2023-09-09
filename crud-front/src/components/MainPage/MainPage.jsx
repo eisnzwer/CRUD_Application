@@ -39,12 +39,13 @@ let MainPage = () => {
 
   const loadUsers = async () => {
     const result = await axios.get('http://localhost:8080/users');
+    console.log(result);
     setUsers(result.data);
   };
 
   const deleteUser = async (id) => {
     await axios.delete(`http://localhost:8080/user/${id}`);
-    setUsers({...users});
+    loadUsers({...users});
   };
 
   let usersNodes = users.map(user => <User id={user.id} key={user.id} name={user.name} username={user.username} email={user.email} onDelete={deleteUser}/>);

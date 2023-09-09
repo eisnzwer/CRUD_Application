@@ -17,6 +17,7 @@ let EditUser = () => {
   
   const onInputChange = (e) => {
     setUser({...user, [e.target.name]: e.target.value });
+    console.log(user);
   };
 
   // const onSubmit = async (e) => {
@@ -46,15 +47,15 @@ let EditUser = () => {
       <div className={`${style.inputsContainer} form-container container`}>
         <label htmlFor="form-floating">Name</label>
         <div className="form-floating">
-          <input onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
+          <input name="name" onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
         </div>
         <label htmlFor="form-floating">Username</label>
         <div className="form-floating">
-          <input onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
+          <input name="username" onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
         </div>
         <label htmlFor="form-floating">Email address</label>
         <div className="form-floating">
-          <input onChange={onInputChange} type="email" className={`form-control ${style.input}`} id="floatingPassword" placeholder="Password"/>
+          <input name="email" onChange={onInputChange} type="email" className={`form-control ${style.input}`} id="floatingPassword" placeholder="Password"/>
         </div>
         <button className="btn btn-primary w-100 py-2" type="submit">Create new user</button>
       </div>

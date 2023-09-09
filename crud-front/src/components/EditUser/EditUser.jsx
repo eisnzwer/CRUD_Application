@@ -19,6 +19,7 @@ let EditUser = () => {
   
   const onInputChange = (e) => {
     setUser({...user, [e.target.name]: e.target.value });
+    console.log(user);
   };
 
   const onSubmit = async (e) => {
@@ -32,8 +33,9 @@ let EditUser = () => {
   };
 
   const loadUser = async () => {
-    const response = await axios.get(`${LINK}/user/${id}`);
+    const response = await axios.get(`http://localhost:8080/user/${id}`);
     setUser(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => { loadUser();}, []);
@@ -47,17 +49,17 @@ let EditUser = () => {
       <div className={`${style.inputsContainer} form-container container`}>
         <label htmlFor="form-floating">Name</label>
         <div className="form-floating">
-          <input onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
+          <input value={user.name} name="name" onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
         </div>
         <label htmlFor="form-floating">Username</label>
         <div className="form-floating">
-          <input onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
+          <input value={user.username} name="username" onChange={onInputChange} type="text" className={`form-control ${style.input}`} id="floatingInput" placeholder="name@example.com"/>
         </div>
         <label htmlFor="form-floating">Email address</label>
         <div className="form-floating">
-          <input onChange={onInputChange} type="email" className={`form-control ${style.input}`} id="floatingPassword" placeholder="Password"/>
+          <input value={user.email} name="email" onChange={onInputChange} type="email" className={`form-control ${style.input}`} id="floatingPassword" placeholder="Password"/>
         </div>
-        <button className="btn btn-primary w-100 py-2" type="submit">Create new user</button>
+        <button className="btn btn-primary w-100 py-2" type="submit">Edit user</button>
       </div>
     </form>
   );
