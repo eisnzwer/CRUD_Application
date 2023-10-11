@@ -4,7 +4,7 @@
 
 To load the project you need to:
 
-Start Spring Boot Application
+### 'Start Spring Boot Application'
 
 ### `npm start`
 
